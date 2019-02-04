@@ -1,9 +1,32 @@
 language: node_js
 node_js:
-- '11' # EOL: June 2019
-- '10' # EOL: April 2021
-- '8' # EOL: December 2019
-- '6' # EOL: April 2019
+    - '11' # EOL: June 2019
+    - '10' # EOL: April 2021
+    - '8' # EOL: December 2019
+    - '6' # EOL: April 2019
 script:
-- npm run lint
-- npm run test
+    - npm run lint
+    - npm run test
+before_deploy:
+    - if [ "$TRAVIS_BRANCH" = master ] && [ "$TRAVIS_PULL_REQUEST" = false ]; then npm version prerelease --no-git-tag-version --preid "$TRAVIS_BUILD_NUMBER"; fi
+deploy:
+    - provider: npm
+      email: info@saturnserver.org
+      api_key:
+          secure: SDhl35F21k8aVeosT9UwPsgrIQXLQsBtaLCcY+8LpRFi4JUhpemX3lJ+fzbTgkXKNgRhLFRNRuY+92AABczhzmbEQGGoAUJsGpo7ySAxviAW32eYq2BfKwooVaCSyGzXPc3AEAnyG20uBV+hahJ5tXn5O+Oz6KQb5eMV4d6e/O+QAD52Lycth4azWNZRgCJlKCFqIW77xywtUodOukTsEuD+WdrfV7FJ6RBd+DSvmzRSzebc3II37PahEGl1lavlVZP5IYA/zah0wXuTFsS1K4r8xCTuBfoamWl30iFplMsTNwtxgwm8O5SCN2qdMCQ0ur5lxnNiq16mSdy9eVHFprUCfIFLc5KX885rd3aBHFHFeebJfm4x87CwzvOdtACim4IfjmtMfQ4+SzmxZhn7lxwjiMHKbnCluhrwQIhRG9xMmtJOXE22Wbxzn9m9BUxeDHghh5s2gHhDuqzG0C3wKO36Nr3SufTYvun/ftHW8z9d/EJbvcWamPLNSZH8Kw+ij4uN6xlAXvf/EL0iSNU8OFN4VCEg5a7YG1/rZ3MO/FJ0rTlptd8x/bRix85YMIhVU6nfgXrOmnbz0D2XMVxUpBOEv/BDJFE7CxWdhuxTfk+8Y4Y/gYP6W/ztsJnHJFZ1OD3MlgYKSjbS+/u/zQBmktmq/kj9bCCIeWZjRyWLzBE=
+      tag: next
+      skip_cleanup: true
+      on:
+          node: 10
+          branch: master
+          repo: Ionaru/typed-events
+    - provider: npm
+      email: info@saturnserver.org
+      api_key:
+          secure: SDhl35F21k8aVeosT9UwPsgrIQXLQsBtaLCcY+8LpRFi4JUhpemX3lJ+fzbTgkXKNgRhLFRNRuY+92AABczhzmbEQGGoAUJsGpo7ySAxviAW32eYq2BfKwooVaCSyGzXPc3AEAnyG20uBV+hahJ5tXn5O+Oz6KQb5eMV4d6e/O+QAD52Lycth4azWNZRgCJlKCFqIW77xywtUodOukTsEuD+WdrfV7FJ6RBd+DSvmzRSzebc3II37PahEGl1lavlVZP5IYA/zah0wXuTFsS1K4r8xCTuBfoamWl30iFplMsTNwtxgwm8O5SCN2qdMCQ0ur5lxnNiq16mSdy9eVHFprUCfIFLc5KX885rd3aBHFHFeebJfm4x87CwzvOdtACim4IfjmtMfQ4+SzmxZhn7lxwjiMHKbnCluhrwQIhRG9xMmtJOXE22Wbxzn9m9BUxeDHghh5s2gHhDuqzG0C3wKO36Nr3SufTYvun/ftHW8z9d/EJbvcWamPLNSZH8Kw+ij4uN6xlAXvf/EL0iSNU8OFN4VCEg5a7YG1/rZ3MO/FJ0rTlptd8x/bRix85YMIhVU6nfgXrOmnbz0D2XMVxUpBOEv/BDJFE7CxWdhuxTfk+8Y4Y/gYP6W/ztsJnHJFZ1OD3MlgYKSjbS+/u/zQBmktmq/kj9bCCIeWZjRyWLzBE=
+      skip_cleanup: true
+      on:
+          node: 10
+          branch: master
+          tags: true
+          repo: Ionaru/typed-events

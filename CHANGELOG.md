@@ -6,7 +6,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
+- Travis config for auto-deploy
+
+## [0.0.1]
+### Added
 - Initial code
 - Project setup
 
-[Unreleased]: https://github.com/Ionaru/typed-events/compare/e3eed83...HEAD
+[Unreleased]: https://github.com/Ionaru/typed-events/compare/0.0.1...HEAD
+[0.0.1]: https://github.com/Ionaru/typed-events/compare/e3eed83...0.0.1
