@@ -1,0 +1,38 @@
+{
+    "name": "@ionaru/typed-events",
+    "version": "0.0.1",
+    "description": "A tiny module for type-safe events.",
+    "bin": "dist/index.js",
+    "main": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "files": [
+        "dist/**/*"
+    ],
+    "scripts": {
+        "build": "tsc --project tsconfig.json",
+        "lint:src": "tslint --project tsconfig.json -c tslint.json src/**/*.ts --format stylish",
+        "lint:spec": "tslint --project tsconfig.json -c tslint.json test/**/*.ts --format stylish",
+        "lint": "npm run lint:src && npm run lint:spec",
+        "pretest": "npm run lint",
+        "test": "jest",
+        "prepare": "npm run build",
+        "preversion": "npm run lint && npm run test"
+    },
+    "jest": {
+        "preset": "ts-jest",
+        "testEnvironment": "node"
+    },
+    "keywords": [],
+    "author": "Jeroen Akkerman",
+    "repository": "github:Ionaru/typed-events",
+    "license": "MIT",
+    "devDependencies": {
+        "@types/jest": "^23.0.0",
+        "@types/node": "latest",
+        "jest": "^23.0.0",
+        "ts-jest": "^23.0.0",
+        "tslint": "latest",
+        "typescript": "latest"
+    },
+    "dependencies": {}
+}

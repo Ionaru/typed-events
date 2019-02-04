@@ -1,0 +1,35 @@
+{
+    "compilerOptions": {
+        "baseUrl": "",
+        "declaration": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "strict": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noImplicitReturns": true,
+        "noFallthroughCasesInSwitch": true,
+        "resolveJsonModule": true,
+        "lib": [
+            "esnext",
+            "es2018",
+            "es2017",
+            "es2016"
+        ],
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "outDir": "./dist",
+        "sourceMap": true,
+        "target": "es6",
+        "typeRoots": [
+            "./node_modules/@types"
+        ]
+    },
+    "exclude": [
+        "./node_modules",
+        "./src/**/*.spec.ts"
+    ],
+    "include": [
+        "./src/**/*.ts"
+    ]
+}
