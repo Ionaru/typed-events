@@ -15,12 +15,18 @@ export class TypedEvent<T> {
         };
     }
 
-    public once(listener: IListener<T>): void {
+    public once(listener: IListener<T>): IDisposable {
         this.oneTimeListeners.push(listener);
+        return {
+            dispose: () => this.off(listener),
+        };
     }
 
     public off(listenerToRemove: IListener<T>): void {
-        this.listeners = this.listeners.filter((listener) => listener !== listenerToRemove);
+        const filterFuntion = (listener: IListener<T>) => listener !== listenerToRemove;
+
+        this.listeners = this.listeners.filter(filterFuntion);
+        this.oneTimeListeners = this.oneTimeListeners.filter(filterFuntion);
     }
 
     public emit(event: T): void {

@@ -117,6 +117,21 @@ describe('TypedEvent.off', () => {
         expect(eventCalled).toBeFalsy();
     });
 
+    test('One .once listener', () => {
+
+        let eventCalled = false;
+
+        const myEvent = new TypedEvent();
+
+        const listener = () => eventCalled = true;
+        myEvent.once(listener);
+        myEvent.off(listener);
+
+        myEvent.emit({});
+
+        expect(eventCalled).toBeFalsy();
+    });
+
     test('Between emits', () => {
 
         let timesCalled = 0;
@@ -124,6 +139,20 @@ describe('TypedEvent.off', () => {
         const myEvent = new TypedEvent();
         const listener = () => timesCalled++;
         myEvent.on(listener);
+        myEvent.emit({});
+        myEvent.off(listener);
+        myEvent.emit({});
+
+        expect(timesCalled).toBe(1);
+    });
+
+    test('No error when dispose after emit.', () => {
+
+        let timesCalled = 0;
+
+        const myEvent = new TypedEvent();
+        const listener = () => timesCalled++;
+        myEvent.once(listener);
         myEvent.emit({});
         myEvent.off(listener);
         myEvent.emit({});
@@ -153,7 +182,7 @@ describe('TypedEvent.pipe', () => {
 });
 
 describe('TypedEvent disposable', () => {
-    test('Remove listener through disposable', () => {
+    test('Remove .on listener through disposable', () => {
 
         let eventCalled = false;
 
@@ -161,6 +190,37 @@ describe('TypedEvent disposable', () => {
 
         const listener = () => eventCalled = true;
         const disposable: IDisposable = myEvent.on(listener);
+        disposable.dispose();
+
+        myEvent.emit({});
+
+        expect(eventCalled).toBeFalsy();
+    });
+
+    test('Remove .once listener through disposable', () => {
+
+        let eventCalled = false;
+
+        const myEvent = new TypedEvent();
+
+        const listener = () => eventCalled = true;
+        const disposable: IDisposable = myEvent.once(listener);
+        disposable.dispose();
+
+        myEvent.emit({});
+
+        expect(eventCalled).toBeFalsy();
+    });
+
+    test('Disposing multiple times should not error', () => {
+
+        let eventCalled = false;
+
+        const myEvent = new TypedEvent();
+
+        const listener = () => eventCalled = true;
+        const disposable: IDisposable = myEvent.once(listener);
+        disposable.dispose();
         disposable.dispose();
 
         myEvent.emit({});
