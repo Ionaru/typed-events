@@ -23,10 +23,10 @@ export class TypedEvent<T> {
     }
 
     public off(listenerToRemove: IListener<T>): void {
-        const filterFuntion = (listener: IListener<T>) => listener !== listenerToRemove;
+        const filterFunction = (listener: IListener<T>) => listener !== listenerToRemove;
 
-        this.listeners = this.listeners.filter(filterFuntion);
-        this.oneTimeListeners = this.oneTimeListeners.filter(filterFuntion);
+        this.listeners = this.listeners.filter(filterFunction);
+        this.oneTimeListeners = this.oneTimeListeners.filter(filterFunction);
     }
 
     public emit(event: T): void {
