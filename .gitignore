@@ -10,6 +10,7 @@ node_modules/
 # Build files & test artifacts
 coverage/
 dist/
+dist.browser/
 
 # Local application files
 logs/

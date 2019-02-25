@@ -4,14 +4,16 @@
     "description": "A tiny module for type-safe events.",
     "bin": "dist/index.js",
     "main": "dist/index.js",
+    "module": "dist.browser/index.js",
     "types": "dist/index.d.ts",
     "files": [
-        "dist/**/*"
+        "dist",
+        "dist.browser"
     ],
     "scripts": {
-        "build": "tsc --project tsconfig.json",
-        "lint:src": "tslint --project tsconfig.json -c tslint.json src/**/*.ts --format stylish",
-        "lint:spec": "tslint --project tsconfig.json -c tslint.json test/**/*.ts --format stylish",
+        "build": "tsc --project tsconfig.json && tsc --project tsconfig.browser.json",
+        "lint:src": "tslint -c tslint.json src/**/*.ts --format stylish",
+        "lint:spec": "tslint -c tslint.json src/**/*.spec.ts --format stylish",
         "lint": "npm run lint:src && npm run lint:spec",
         "pretest": "npm run lint",
         "test": "jest",
@@ -19,6 +21,7 @@
         "preversion": "npm run lint && npm run test"
     },
     "jest": {
+        "collectCoverage": true,
         "preset": "ts-jest",
         "testEnvironment": "node"
     },
@@ -27,10 +30,10 @@
     "repository": "github:Ionaru/typed-events",
     "license": "MIT",
     "devDependencies": {
-        "@types/jest": "^23.0.0",
+        "@types/jest": "^24.0.6",
         "@types/node": "latest",
-        "jest": "^23.0.0",
-        "ts-jest": "^23.0.0",
+        "jest": "^24.1.0",
+        "ts-jest": "^24.0.0",
         "tslint": "latest",
         "typescript": "latest"
     },
