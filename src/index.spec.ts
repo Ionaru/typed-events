@@ -1,19 +1,23 @@
 import { IDisposable, IListener, TypedEvent } from './';
 
-describe('TypedEvent.once', () => {
-    test('One listener', () => {
+describe('test TypedEvent.once', () => {
+    it('one listener', () => {
+
+        expect.assertions(1);
 
         let eventCalled = false;
 
         const myEvent = new TypedEvent();
-        const listener: IListener<{}> = () => eventCalled = true;
+        const listener: IListener<unknown> = () => eventCalled = true;
         myEvent.on(listener);
         myEvent.emit({});
 
         expect(eventCalled).toBeTruthy();
     });
 
-    test('Multiple listeners', () => {
+    it('multiple listeners', () => {
+
+        expect.assertions(2);
 
         let eventCalled = false;
         let secondEventCalled = false;
@@ -27,7 +31,9 @@ describe('TypedEvent.once', () => {
         expect(secondEventCalled).toBeTruthy();
     });
 
-    test('Multiple emits', () => {
+    it('multiple emits', () => {
+
+        expect.assertions(1);
 
         let timesCalled = 0;
 
@@ -39,7 +45,10 @@ describe('TypedEvent.once', () => {
         expect(timesCalled).toBe(1);
     });
 
-    test('Emit parameter', () => {
+    it('emit parameter', () => {
+
+        expect.assertions(1);
+
         let someNumber;
 
         const myEvent = new TypedEvent<number>();
@@ -51,8 +60,10 @@ describe('TypedEvent.once', () => {
     });
 });
 
-describe('TypedEvent.on', () => {
-    test('One listener', () => {
+describe('test TypedEvent.on', () => {
+    it('one listener', () => {
+
+        expect.assertions(1);
 
         let eventCalled = false;
 
@@ -63,7 +74,9 @@ describe('TypedEvent.on', () => {
         expect(eventCalled).toBeTruthy();
     });
 
-    test('Multiple listeners', () => {
+    it('multiple listeners', () => {
+
+        expect.assertions(2);
 
         let eventCalled = false;
         let secondEventCalled = false;
@@ -77,7 +90,9 @@ describe('TypedEvent.on', () => {
         expect(secondEventCalled).toBeTruthy();
     });
 
-    test('Multiple emits', () => {
+    it('multiple emits', () => {
+
+        expect.assertions(1);
 
         let timesCalled = 0;
 
@@ -89,7 +104,10 @@ describe('TypedEvent.on', () => {
         expect(timesCalled).toBe(2);
     });
 
-    test('Emit parameter', () => {
+    it('emit parameter', () => {
+
+        expect.assertions(1);
+
         let someNumber;
 
         const myEvent = new TypedEvent<number>();
@@ -101,8 +119,10 @@ describe('TypedEvent.on', () => {
     });
 });
 
-describe('TypedEvent.off', () => {
-    test('One listener', () => {
+describe('test TypedEvent.off', () => {
+    it('one listener', () => {
+
+        expect.assertions(1);
 
         let eventCalled = false;
 
@@ -117,7 +137,9 @@ describe('TypedEvent.off', () => {
         expect(eventCalled).toBeFalsy();
     });
 
-    test('One .once listener', () => {
+    it('one .once listener', () => {
+
+        expect.assertions(1);
 
         let eventCalled = false;
 
@@ -132,7 +154,9 @@ describe('TypedEvent.off', () => {
         expect(eventCalled).toBeFalsy();
     });
 
-    test('Between emits', () => {
+    it('between emits', () => {
+
+        expect.assertions(1);
 
         let timesCalled = 0;
 
@@ -146,7 +170,9 @@ describe('TypedEvent.off', () => {
         expect(timesCalled).toBe(1);
     });
 
-    test('No error when dispose after emit.', () => {
+    it('no error when dispose after emit.', () => {
+
+        expect.assertions(1);
 
         let timesCalled = 0;
 
@@ -161,8 +187,10 @@ describe('TypedEvent.off', () => {
     });
 });
 
-describe('TypedEvent.pipe', () => {
-    test('Pipe to another listener', () => {
+describe('test TypedEvent.pipe', () => {
+    it('pipe to another listener', () => {
+
+        expect.assertions(1);
 
         let timesCalled = 0;
 
@@ -181,8 +209,10 @@ describe('TypedEvent.pipe', () => {
     });
 });
 
-describe('TypedEvent disposable', () => {
-    test('Remove .on listener through disposable', () => {
+describe('test TypedEvent disposable', () => {
+    it('remove .on listener through disposable', () => {
+
+        expect.assertions(1);
 
         let eventCalled = false;
 
@@ -197,7 +227,9 @@ describe('TypedEvent disposable', () => {
         expect(eventCalled).toBeFalsy();
     });
 
-    test('Remove .once listener through disposable', () => {
+    it('remove .once listener through disposable', () => {
+
+        expect.assertions(1);
 
         let eventCalled = false;
 
@@ -212,7 +244,9 @@ describe('TypedEvent disposable', () => {
         expect(eventCalled).toBeFalsy();
     });
 
-    test('Disposing multiple times should not error', () => {
+    it('disposing multiple times should not error', () => {
+
+        expect.assertions(1);
 
         let eventCalled = false;
 

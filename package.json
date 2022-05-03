@@ -11,14 +11,16 @@
         "dist.browser"
     ],
     "scripts": {
+        "clean": "npx -q rimraf dist && npx -q rimraf dist.browser",
+        "prebuild": "npm run clean",
         "build": "tsc --project tsconfig.json && tsc --project tsconfig.browser.json",
-        "lint:src": "tslint -c tslint.json src/**/*.ts --format stylish",
-        "lint:spec": "tslint -c tslint.json src/**/*.spec.ts --format stylish",
-        "lint": "npm run lint:src && npm run lint:spec",
+        "lint": "npm run lint:src && npm run lint:test",
+        "lint:src": "eslint --ext ts --max-warnings 0 --ignore-pattern *.spec.ts src",
+        "lint:test": "eslint --ext ts --plugin jest --env jest/globals src/**/*.spec.ts",
         "pretest": "npm run lint",
-        "test": "jest",
+        "test": "jest src",
         "prepare": "npm run build",
-        "preversion": "npm run lint && npm run test"
+        "preversion": "npm run test"
     },
     "jest": {
         "collectCoverage": true,
@@ -30,12 +32,19 @@
     "repository": "github:Ionaru/typed-events",
     "license": "MIT",
     "devDependencies": {
-        "@types/jest": "^24.0.6",
+        "@ionaru/eslint-config": "^6.3.0",
+        "@types/jest": "^27.0.2",
         "@types/node": "latest",
-        "jest": "^24.1.0",
-        "ts-jest": "^24.0.0",
-        "tslint": "latest",
-        "typescript": "latest"
-    },
-    "dependencies": {}
+        "@typescript-eslint/eslint-plugin": "^5.22.0",
+        "eslint": "^8.14.0",
+        "eslint-plugin-import": "^2.26.0",
+        "eslint-plugin-jest": "^26.1.5",
+        "eslint-plugin-no-null": "^1.0.2",
+        "eslint-plugin-prefer-arrow": "^1.2.3",
+        "eslint-plugin-sonarjs": "^0.13.0",
+        "eslint-plugin-unicorn": "^42.0.0",
+        "jest": "^28.0.3",
+        "ts-jest": "^28.0.0",
+        "typescript": "^4.0.0"
+    }
 }

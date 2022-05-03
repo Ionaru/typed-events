@@ -25,11 +25,7 @@
             "./node_modules/@types"
         ]
     },
-    "exclude": [
-        "./node_modules",
-        "./src/**/*.spec.ts"
-    ],
-    "include": [
-        "./src/**/*.ts"
+    "files": [
+        "src/index.ts"
     ]
 }
